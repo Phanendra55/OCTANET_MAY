@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+       body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-image: url('https://images.unsplash.com/photo-1518655048521-f130df041f66?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Replace 'your-image-url.jpg' with your actual image URL */
+    background-size: cover;
+    background-position: center;
+    animation: fadeIn 2s ease-in-out; /* Apply fade-in animation */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+        header, footer {
+            background-color: #1a85c8;
+            color: #fff;
+            text-align: center;
+            padding: -1000px;
+            position: fixed;
+            width: 100%;
+            height: 60px;
+        }
+
+        header {
+            top: 0;
+        }
+
+        footer {
+            bottom: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 80px auto 20px;
+            padding: 0 20px;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 80px);
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 8px 20px;
+            margin-bottom: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button.delete-btn {
+            background-color: #f44336;
+        }
+
+        button.complete-btn {
+            background-color: #4CAF50;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .task-buttons {
+            display: flex;
+            align-items: center;
+            margin-left: auto; /* Push buttons to the right */
+        }
+
+        .completed {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        .delete-btn {
+            padding: 6px 10px;
+            cursor: pointer;
+        }
+        .task-buttons button {
+    margin-right: 5px; 
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>To-Do List</h1>
+    </header>
+    <br><br><br>
+    <div class="container">
+        <input type="text" id="taskInput" placeholder="Add new task...">
+        <button onclick="addItem()">Add Task</button>
+        <ul id="taskList">
+           
+        </ul>
+    </div>
+
+    <footer>
+        <p>Copyright© PHANI</p>
+    </footer>
+
+    <script>
+        function addItem() {
+            var input = document.getElementById("taskInput").value;
+            if (input.trim() === "") return; 
+            var ul = document.getElementById("taskList");
+            var li = document.createElement("li");
+            var taskText = document.createTextNode(input);
+            li.appendChild(taskText);
+            
+            var buttonContainer = document.createElement("div");
+            buttonContainer.classList.add("task-buttons");
+
+            var completeBtn = document.createElement("button");
+            completeBtn.textContent = "Complete";
+            completeBtn.classList.add("complete-btn");
+            completeBtn.onclick = function() {
+                li.classList.toggle("completed");
+            };
+
+            var space = document.createTextNode(" "); 
+
+            var deleteBtn = document.createElement("button");
+            deleteBtn.textContent = "Delete";
+            deleteBtn.classList.add("delete-btn");
+            deleteBtn.onclick = function() {
+                ul.removeChild(li);
+            };
+
+            buttonContainer.appendChild(completeBtn);
+            buttonContainer.appendChild(space); 
+            buttonContainer.appendChild(deleteBtn);
+            
+            li.appendChild(buttonContainer);
+            ul.appendChild(li);
+            document.getElementById("taskInput").value = ""; 
+        }
+    </script>
+</body>
+</html>
